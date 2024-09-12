@@ -16,36 +16,46 @@
 - **Data Cleaning and Transformation using SQL and BigQuery**
 
 - **Created a new table (`production_cleaned`), selected useful columns, and renamed them**
-    ```sql
+ ```sql
     CREATE OR REPLACE TABLE my-portifolio-434417.Europe_Crops.production_cleaned AS
-    SELECT 
-      Area AS country, 
-      Item AS crop, 
-      Unit AS unit,
-      Value AS value
-    FROM 
-      my-portifolio-434417.Europe_Crops.production;
-    ```
+SELECT 
+  Area AS country, 
+  Item AS crop, 
+  Element AS element,
+  Value AS value,
+  Unit AS unit,
+  
+FROM 
+  my-portifolio-434417.Europe_Crops.production;
+```
 
-- **Conversion of measurement units from 100 grams per hectare (100 g/ha) to tons per hectare (ton/ha)**
-    ```sql
-    UPDATE 
-      `my-portifolio-434417.Europe_Crops.production_cleaned`
-    SET 
-      value = value * 0.0001
-    WHERE 
-      unit = '100 g/ha';
-    ```
+- **Convertendo 'value' para FLOAT64**
+ ```sql
+   CREATE OR REPLACE TABLE `my-portifolio-434417.Europe_Crops.production_cleaned` AS
+SELECT 
+  country,
+  crop,
+  element,
+  CAST(value AS FLOAT64) AS value,  
+  unit
+FROM 
+  `my-portifolio-434417.Europe_Crops.production_cleaned`;
+```
 
-- **Updated the column `unit` from '100 g/ha' to 'ton/ha'**
-    ```sql
+
+
+
+- **Update Values and Units from 100 g/ha to ton/ha in Agricultural**
+ ```sql
     UPDATE 
-      `my-portifolio-434417.Europe_Crops.production_cleaned`
-    SET 
-      unit = 'ton/ha'
-    WHERE 
-      unit = '100 g/ha';
-    ```
+  `my-portifolio-434417.Europe_Crops.production_cleaned`
+SET 
+  value = ROUND(value * 0.0001, 2),  
+  unit = 'ton/ha' 
+WHERE 
+  unit = '100 g/ha';
+
+```
 ## price_table - Task Log
 
 ### Data Preparation
