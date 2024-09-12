@@ -91,6 +91,20 @@ SET
 WHERE 
   unit = 'USD';
 ```
+- **Joining Production and Price Data by Country and Crop**
+```SQL
+SELECT 
+  p.*,                  
+  pc.value AS price_value,  
+  pc.unit AS price_unit     
+FROM 
+  `my-portifolio-434417.Europe_Crops.production_cleaned` p
+LEFT JOIN 
+  `my-portifolio-434417.Europe_Crops.price_cleaned` pc
+ON 
+  p.country = pc.country AND
+  p.crop = pc.crop;
+```
 
 
   
