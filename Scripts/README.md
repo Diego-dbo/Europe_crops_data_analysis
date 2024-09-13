@@ -6,7 +6,7 @@
 
 - **Data Collection**  
   **Source:** FAO  
-  **Data:** Downloaded data for all crops, Europe region, and 2022 (last available year): [FAO Data](https://www.fao.org).
+  **Data:** Downloaded data for all crops, Europe region, and 2022 (last available year): [FAO Data](https://www.fao.org/home/search/en/?q=production).
 
 ### Data Processing
 
